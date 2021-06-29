@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Servicos;
 
 namespace WebApi.Controllers
 {
@@ -6,16 +7,17 @@ namespace WebApi.Controllers
     [ApiController]
     public class ValorUnidadeMedidaController : ControllerBase
     {
+        private readonly IValorUnidadeMedidaService valorUnidadeMedidaService;
+
+        public ValorUnidadeMedidaController(IValorUnidadeMedidaService valorUnidadeMedidaService)
+        {
+            this.valorUnidadeMedidaService = valorUnidadeMedidaService;
+        }
+
         [HttpGet("{unidadeMedida}")]
         public ActionResult<decimal> Get(UnidadeMedida unidadeMedida)
         {
-            return 100m;
+            return valorUnidadeMedidaService.ObterValorUnidadeMedida(unidadeMedida);
         }
-    }
-
-    public enum UnidadeMedida
-    {
-        Metro = 1,
-        Pe = 2
     }
 }
