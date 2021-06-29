@@ -22,9 +22,4 @@ namespace Repositorios
             return unidades.FirstOrDefault(x => x.UnidadeMedida == unidadeMedida).Valor;
         }
     }
-
-    public interface IValorUnidadeMedidaRepository
-    {
-        decimal ObterValor(UnidadeMedida unidadeMedida);
-    }
 }

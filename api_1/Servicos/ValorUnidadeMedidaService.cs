@@ -17,9 +17,4 @@ namespace Servicos
             return valorUnidadeMedidaRepository.ObterValor(unidadeMedida);
         }
     }
-
-    public interface IValorUnidadeMedidaService
-    {
-        decimal ObterValorUnidadeMedida(UnidadeMedida unidadeMedida);
-    }
 }
