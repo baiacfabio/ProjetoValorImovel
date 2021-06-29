@@ -1,21 +1,25 @@
-﻿namespace Servicos
+﻿using Modelos;
+using Repositorios;
+
+namespace Servicos
 {
     public class ValorUnidadeMedidaService : IValorUnidadeMedidaService
     {
+        private readonly IValorUnidadeMedidaRepository valorUnidadeMedidaRepository;
+
+        public ValorUnidadeMedidaService(IValorUnidadeMedidaRepository valorUnidadeMedidaRepository)
+        {
+            this.valorUnidadeMedidaRepository = valorUnidadeMedidaRepository;
+        }
+
         public decimal ObterValorUnidadeMedida(UnidadeMedida unidadeMedida)
         {
-            return 100m;
+            return valorUnidadeMedidaRepository.ObterValor(unidadeMedida);
         }
     }
 
     public interface IValorUnidadeMedidaService
     {
         decimal ObterValorUnidadeMedida(UnidadeMedida unidadeMedida);
-    }
-
-    public enum UnidadeMedida
-    {
-        Metro = 1,
-        Pe = 2
     }
 }

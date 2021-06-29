@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Modelos;
 using Servicos;
 
 namespace WebApi.Controllers

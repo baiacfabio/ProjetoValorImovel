@@ -1,4 +1,7 @@
+using Modelos;
+using NSubstitute;
 using NUnit.Framework;
+using Repositorios;
 using Servicos;
 
 namespace Tests
@@ -6,11 +9,15 @@ namespace Tests
     public class ValorUnidadeMedidaServiceTests
     {
         private IValorUnidadeMedidaService valorUnidadeMedidaService;
+        private IValorUnidadeMedidaRepository valorUnidadeMedidaRepository;
 
         [SetUp]
         public void Setup()
         {
-            valorUnidadeMedidaService = new ValorUnidadeMedidaService();
+            valorUnidadeMedidaRepository = Substitute.For<IValorUnidadeMedidaRepository>();
+            valorUnidadeMedidaRepository.ObterValor(Arg.Any<UnidadeMedida>()).Returns(100);
+
+            valorUnidadeMedidaService = new ValorUnidadeMedidaService(valorUnidadeMedidaRepository);
         }
 
         [Test]
