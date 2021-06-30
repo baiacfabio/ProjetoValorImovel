@@ -7,6 +7,9 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Repositorios;
 using Servicos;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace WebApi
 {
@@ -34,6 +37,9 @@ namespace WebApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Consulta Valor Unidade Medida", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services.AddSwaggerGenNewtonsoftSupport();
