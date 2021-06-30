@@ -113,7 +113,7 @@ jobs:
         # (Optional, default: "./")
         # Dockerfile directory.
         # For example, if you have a Dockerfile in the root of your project, leave it as follows:
-        dockerfile_directory: ./api_2/WebApi/
+        dockerfile_directory: ./api_2/
         dockerfile_name: Dockerfile
 
         # (Optional, default: "")
