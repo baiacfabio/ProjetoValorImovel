@@ -97,8 +97,8 @@ jobs:
   heroku-deploy-api-2:
     runs-on: ubuntu-latest
     environment:
-      name: production_api_1
-      url: https://fabio-webapi-1.herokuapp.com/swagger
+      name: production_api_2
+      url: https://fabio-webapi-2.herokuapp.com/swagger
     needs: heroku-deploy-api-1
     steps:
     - name: Checkout
@@ -108,7 +108,7 @@ jobs:
       with:
         email: ${{ secrets.HEROKU_EMAIL }}
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: ${{ secrets.HEROKU_APP_NAME_2 }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
 
         # (Optional, default: "./")
         # Dockerfile directory.
