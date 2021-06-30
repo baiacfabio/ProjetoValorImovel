@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:WebApi.Controllers.ValorUnidadeMedidaController.Get(Modelos.UnidadeMedida)">
+             <summary>
+             Retorna o valor definido para a unidade de medida informada
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 GET api/v1/ValorUnidadeMedida/{unidadeMedida}
+                 100
+            
+             </remarks>
+             <returns>Valor</returns>
+             <response code="200">Retorna o valor da unidade de medida que foi solicitada por parametro</response>
+        </member>
+    </members>
+</doc>
