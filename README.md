@@ -1,3 +1,5 @@
+[![Build](https://github.com/baiacfabio/ProjetoValorImovel/actions/workflows/main.yml/badge.svg)](https://github.com/baiacfabio/ProjetoValorImovel/actions/workflows/main.yml)
+
 # Projeto
 
 Esse é um simples projeto de APIs para calcular o valor de um imovel com base em sua metragem.
