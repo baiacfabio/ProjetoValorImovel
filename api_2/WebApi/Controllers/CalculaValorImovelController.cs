@@ -10,14 +10,14 @@ namespace WebApi.Controllers
     public class CalculaValorImovelController : ControllerBase
     {
         const string URL_BASE = "https://fabio-webapi-1.herokuapp.com/api/v1/";
-        const int VALOR_MINIMO = 10;
-        const int VALOR_MAXIMO = 10_000;
+        const int METRAGEM_MINIMA = 10;
+        const int METRAGEM_MAXIMA = 10_000;
 
-        [HttpGet("{quantificadorMedida}")]
-        public async Task<IActionResult> CalcularValorAsync([FromRoute] decimal quantificadorMedida)
+        [HttpGet("{metragem}")]
+        public async Task<IActionResult> CalcularValorPelaMetragemAsync([FromRoute] decimal metragem)
         {
-            if (quantificadorMedida < VALOR_MINIMO || quantificadorMedida > VALOR_MAXIMO)
-                return new BadRequestObjectResult($"Quantificador da medida deve ser um valor entre {VALOR_MINIMO} e {VALOR_MAXIMO}");
+            if (metragem < METRAGEM_MINIMA || metragem > METRAGEM_MAXIMA)
+                return new BadRequestObjectResult($"A metragem informada deve ser um valor entre {METRAGEM_MINIMA} e {METRAGEM_MAXIMA}");
 
             HttpClient httpClient = new HttpClient
             {
@@ -30,7 +30,7 @@ namespace WebApi.Controllers
 
             var valor = await resposta.Content.ReadAsAsync<decimal>();
 
-            var total = quantificadorMedida * valor;
+            var total = metragem * valor;
             return Ok(total);
         }
     }
