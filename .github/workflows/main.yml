@@ -11,6 +11,7 @@ jobs:
   build:
     env: 
       CAMINHO_PROJETO: ./api_1/
+      CAMINHO_PROJETO_TESTES: ./api_1/Testes/
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,7 +24,7 @@ jobs:
       - name: Build 
         run: dotnet build ${{ env.CAMINHO_PROJETO }} --configuration Release --no-restore
       - name: Tests 
-        run: dotnet test ${{ env.CAMINHO_PROJETO }} --verbosity minimal
+        run: dotnet test ${{ env.CAMINHO_PROJETO_TESTES }} --verbosity minimal
         
   deploy-hml-api-1:
     runs-on: ubuntu-latest
