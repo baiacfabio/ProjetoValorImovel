@@ -1,0 +1,70 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    env: 
+      CAMINHO_PROJETO: ./api_1/
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with: 
+          dotnet-version: 3.1.402
+      - name: Install dependencies
+        run: dotnet restore ${{ env.CAMINHO_PROJETO }}
+      - name: Build 
+        run: dotnet build ${{ env.CAMINHO_PROJETO }} --configuration Release --no-restore
+      - name: Tests 
+        run: dotnet test ${{ env.CAMINHO_PROJETO }} --verbosity minimal
+        
+  deploy-hml-api-1:
+    runs-on: ubuntu-latest
+    environment:
+      name: homolog_api_1
+      url: fabiobaia.com  
+    needs: build
+    steps:
+      - name: Faz de conta q ta fazendo deploy num ambiente intermediário
+        run: echo Deploy Homolog
+    
+  heroku-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: hml
+      url: https://fabio-webapi-1.herokuapp.com/swagger
+    needs: deploy-hml-api-1
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
+      uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
+      with:
+        email: ${{ secrets.HEROKU_EMAIL }}
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+
+        # (Optional, default: "./")
+        # Dockerfile directory.
+        # For example, if you have a Dockerfile in the root of your project, leave it as follows:
+        dockerfile_directory: "./"
+        dockerfile_name: Dockerfile
+
+        # (Optional, default: "")
+        # Additional options of docker build command.
+        docker_options: "--no-cache"
+
+        # (Optional, default: "web")
+        # Select the process type for which you want the docker container to be uploaded.
+        # By default, this argument is set to "web".
+        # For more information look at https://devcenter.heroku.com/articles/process-model
+        process_type: web
+      
+  
