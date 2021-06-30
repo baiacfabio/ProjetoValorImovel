@@ -39,7 +39,7 @@ jobs:
   heroku-deploy:
     runs-on: ubuntu-latest
     environment:
-      name: hml
+      name: production_api_1
       url: https://fabio-webapi-1.herokuapp.com/swagger
     needs: deploy-hml-api-1
     steps:
